@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block title %}cart{% endblock title  %}
+{% block content %}
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>S No.</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+        {% for cart in cart_pro %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{cart.name}}</td>
+            <td><img src="{{cart.image.url}}" alt="" width="100" height="100"></td>
+            <td>{{cart.price}}</td>
+            <td>{{cart|cartquantity:request.session.cart}}</td>
+            <td>{{cart|total_price:request.session.cart}}
+            <td></td>
+        {% endfor %}
+        <tfoot>
+            <tr>
+                <td>Total Price</td>
+                <td>{{cart_pro|grand_total:request.session.cart}}</td>
+                <td></td>
+            </tr>
+            <tfoot>
+    </table>
+    <div class ="m-3 p-3">
+        <a data-bs-toggle="modal" data-bs-target="#checkout" class="btn btn-dark border rounded col-lg-3 float-end">
+            Checkout
+        </a>
+
+</div>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'checkout' %}" method="post">
+                {% csrf_token %}
+            <form action="" method="post">
+                <div class="mb-3">
+                    <lable for="address" class="form-lable"> Address</lable>
+                    <input type="text" name="address" id="address" class="form-control">
+                    <lable for="mobile" class="form-lable"> mobile</lable>
+                    <input type="number" name="mobile" id="mobile" class="form-control">
+          ...
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+

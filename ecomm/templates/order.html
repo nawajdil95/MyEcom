@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block title %}order{% endblock title %}
+{% block content %}
+
+<h1>Order Details</h1>
+<div class="container">
+    <table class="table">
+        
+        <tr>
+            <th>S No.</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Total Price</th>  
+        </tr>
+    
+     
+    <tbody>
+</div> 
+
+
+
+{% for ord_dtls in ord_dtls %}
+    
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ord_dtls.product.name}}</td>
+            <td><img src="{{ord_dtls.product.image.url}}" alt="" width="100" height="100"></td>
+            <td>{{ord_dtls.date}}</td>
+            <td>{{ord_dtls.quantity}}</td>
+            <td>{{ord_dtls.quantity|multiplyprice:ord_dtls.price}}</td>
+            <td>{{ord_dtls.date}}</td>
+            {% if ord_dtls.status %}
+            <td><span class= "badge bg-success">order placed</span></td>
+            {% else %}
+            <td><span class="badge bg-warning">pending</span></td>
+            {% endif %}
+        </tr>
+    
+{% endfor %}
+</table>
+{% endblock content %}

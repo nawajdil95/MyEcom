@@ -1,0 +1,19 @@
+.mydiv1{
+    border:5px solid red;
+    margin-bottom:20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: blue;
+    display: flex;
+    justify-content: space-around;
+    /* width: 500px;
+    height: 200; */
+    
+}
+.mydiv2{
+    border:5px solid blue;
+}
+.childdiv{
+    border:5px solid blue;
+}
